@@ -1,5 +1,5 @@
 var fs = require('fs');
-var process = require('process');
+//var process = require('process');
 var build = require('build');
 var express = require('express');
 var app = module.exports = express();
@@ -22,3 +22,6 @@ app.use('*', function (req, res) {
     //TODO: check caching headers
     res.set('Content-Type', 'text/html').send(200, index);
 });
+
+app.listen(2000);
+console.log('listening on port 2000');
