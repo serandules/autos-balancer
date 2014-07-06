@@ -1,0 +1,17 @@
+{
+    "name": "autos",
+    "description": "autos",
+    "version": "0.0.0",
+    "author": {
+        "name": "serandives",
+        "email": "serandives@gmail.com"
+    },
+    "dependencies": {
+        "express": "3.*",
+        "build": "serandules/build#master"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/serandules/autos.git"
+    }
+}
