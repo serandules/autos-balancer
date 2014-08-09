@@ -1,5 +1,6 @@
 var fs = require('fs');
 var build = require('build');
+var http = require('http');
 var express = require('express');
 var proxy = require('proxy');
 var agent = require('hub-agent');
@@ -31,4 +32,4 @@ app.all('*', function (req, res) {
     res.set('Content-Type', 'text/html').send(200, index);
 });
 
-agent(app);
+agent(http.createServer(app));
