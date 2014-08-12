@@ -8,7 +8,6 @@
     },
     "dependencies": {
         "express": "3.*",
-        "proxy": "serandules/proxy#master",
         "build": "serandules/build#master",
         "hub-agent": "serandules/hub-agent#master"
     },
