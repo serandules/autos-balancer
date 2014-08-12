@@ -4,7 +4,6 @@ var http = require('http');
 var express = require('express');
 var agent = require('hub-agent');
 
-var PORT = 4002;
 var app = express();
 
 var index = fs.readFileSync('./public/index.html', 'utf-8');
