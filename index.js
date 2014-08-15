@@ -12,7 +12,7 @@ app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
 app.use('/public', express.static(__dirname + '/public'));
 
 //proxying requests
-app.use(agent.proxy());
+app.use(agent.proxy('autos.serandives.com'));
 
 //hot building component
 app.use(build);
