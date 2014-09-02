@@ -1,12 +1,15 @@
 var fs = require('fs');
-var build = require('build');
 var http = require('http');
 var express = require('express');
 var agent = require('hub-agent');
 
+var HTTP_PORT = 4004;
+
+var dev = process.env.NODE_ENV === 'development';
+
 var app = express();
 
-var index = fs.readFileSync('./public/index.html', 'utf-8');
+var index = fs.readFileSync(__dirname + '/public/index.html', 'utf-8');
 
 app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
 app.use('/public', express.static(__dirname + '/public'));
@@ -15,7 +18,9 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use(agent.proxy());
 
 //hot building component
-app.use(build);
+if (dev) {
+    app.use(require('build'));
+}
 
 //index page
 app.all('*', function (req, res) {
@@ -23,4 +28,4 @@ app.all('*', function (req, res) {
     res.set('Content-Type', 'text/html').send(200, index);
 });
 
-agent(http.createServer(app));
+agent(http.createServer(app, HTTP_PORT));
