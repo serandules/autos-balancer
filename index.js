@@ -28,4 +28,4 @@ app.all('*', function (req, res) {
     res.set('Content-Type', 'text/html').send(200, index);
 });
 
-agent(http.createServer(app, HTTP_PORT));
+agent(http.createServer(app), HTTP_PORT);
