@@ -18,9 +18,7 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use(agent.proxy());
 
 //hot building component
-if (dev) {
-    app.use(require('build'));
-}
+app.use(require('build'));
 
 //index page
 app.all('*', function (req, res) {
@@ -29,3 +27,8 @@ app.all('*', function (req, res) {
 });
 
 agent(http.createServer(app), HTTP_PORT);
+
+process.on('uncaughtException', function (err) {
+    console.log('unhandled exception');
+    console.log(err);
+});
