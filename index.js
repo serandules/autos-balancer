@@ -32,3 +32,12 @@ process.on('uncaughtException', function (err) {
     console.log('unhandled exception ' + err);
     console.log(err.stack);
 });
+
+console.log('----request receive-0');
+setTimeout(function () {
+    console.log('-----executing');
+    agent.config('ruchira', function (data) {
+        console.log('==================');
+        console.log(data);
+    });
+}, 5000);
