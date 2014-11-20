@@ -33,8 +33,9 @@ process.on('uncaughtException', function (err) {
     console.log(err.stack);
 });
 
+/*
 setTimeout(function () {
     agent.config('ruchira', function (data) {
         console.log(data);
     });
-}, 0);
+}, 0);*/
