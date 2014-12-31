@@ -26,6 +26,9 @@ app.all('*', function (req, res) {
     res.set('Content-Type', 'text/html').send(200, index);
 });
 
+//error handling
+app.use(agent.error);
+
 agent(http.createServer(app), HTTP_PORT);
 
 process.on('uncaughtException', function (err) {
