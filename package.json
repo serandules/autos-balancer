@@ -7,6 +7,7 @@
         "email": "serandives@gmail.com"
     },
     "dependencies": {
+        "debug":"*",
         "express": "3.*",
         "build": "serandules/build#master",
         "hub-agent": "serandules/hub-agent#master"

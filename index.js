@@ -1,3 +1,4 @@
+var debug = require('debug')('serandules-autos');
 var fs = require('fs');
 var http = require('http');
 var express = require('express');
@@ -32,13 +33,13 @@ app.use(agent.error);
 agent(http.createServer(app), HTTP_PORT);
 
 process.on('uncaughtException', function (err) {
-    console.log('unhandled exception ' + err);
-    console.log(err.stack);
+    debug('unhandled exception ' + err);
+    debug(err.stack);
 });
 
 /*
 setTimeout(function () {
     agent.config('ruchira', function (data) {
-        console.log(data);
+        debug(data);
     });
 }, 0);*/
