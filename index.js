@@ -1,4 +1,4 @@
-var debug = require('debug')('serandules-autos');
+var debug = require('debug')('serandules:autos');
 var fs = require('fs');
 var http = require('http');
 var express = require('express');
