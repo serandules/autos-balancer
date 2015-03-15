@@ -1,19 +1,9 @@
 {
     "name": "autos",
-    "description": "autos",
-    "version": "0.0.0",
-    "author": {
-        "name": "serandives",
-        "email": "serandives@gmail.com"
-    },
     "dependencies": {
-        "debug":"*",
-        "express": "3.*",
-        "build": "serandules/build#master",
-        "hub-agent": "serandules/hub-agent#master"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/serandules/autos.git"
+        "express": "4.*",
+        "serve-favicon": "2.*",
+        "body-parser": "1.*",
+        "socket.io": "1.3.*"
     }
 }

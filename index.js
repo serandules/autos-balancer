@@ -1,46 +1,58 @@
-var debug = require('debug')('serandules:autos');
-var agent = require('hub-agent');
+var log = require('logger')('autos');
+var clustor = require('clustor');
 
-agent(function () {
+var domain = 'autos.serandives.com';
+var port = 4004;
+
+clustor(domain, function () {
     var fs = require('fs');
     var http = require('http');
     var express = require('express');
-
-    var HTTP_PORT = 4004;
-
-    var app = express();
+    var favicon = require('serve-favicon');
+    var bodyParser = require('body-parser');
+    var builder = require('component-middleware');
+    var agent = require('hub-agent');
+    var procevent = require('procevent')(process);
 
     var index = fs.readFileSync(__dirname + '/public/index.html', 'utf-8');
 
-    app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
+    var app = express();
+
+    app.use(favicon(__dirname + '/public/images/favicon.ico'));
+
     app.use('/public', express.static(__dirname + '/public'));
 
-    //proxying requests
-    app.use(agent.proxy());
-
-    //hot building component
-    app.use(require('build'));
+    app.use(builder({
+        path: '/build/build'
+    }));
 
     //index page
     app.all('*', function (req, res) {
         //TODO: check caching headers
-        res.set('Content-Type', 'text/html').send(200, index);
+        res.set('Content-Type', 'text/html').status(200).send(index);
     });
 
-    //error handling
-    app.use(agent.error);
+    var server = http.createServer(app);
+    server.listen(port);
 
-    http.createServer(app).listen(HTTP_PORT);
-});
+    agent('/drones', function (err, io) {
+        io.once('connect', function () {
+            io.on('join', function (drone) {
+                log.info(drone);
+            });
+            io.on('leave', function (drone) {
+                log.info(drone);
+            });
+            procevent.emit('started');
+        });
+    });
 
-process.on('uncaughtException', function (err) {
-    debug('unhandled exception ' + err);
-    debug(err.stack);
+}, function (err, address) {
+    log.info('drone started | domain:%s, address:%s, port:%s', domain, address.address, address.port);
 });
 
 /*
- setTimeout(function () {
- agent.config('ruchira', function (data) {
- debug(data);
- });
- }, 0);*/
+ process.on('uncaughtException', function (err) {
+ log.fatal('unhandled exception %s', err);
+ log.trace(err.stack);
+ });*/

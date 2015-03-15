@@ -1,8 +1,8 @@
 {
     "name": "autos.serandives.com",
-    "paths": ["app"],
-    "local": [],
+    "scripts": ["client/index.js"],
+    "templates": ["component.json"],
     "dependencies": {
-        "serandomps/autos": "master"
+        "serandomps/autos": "*"
     }
 }
