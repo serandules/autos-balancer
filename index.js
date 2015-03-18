@@ -1,10 +1,10 @@
 var log = require('logger')('autos');
 var clustor = require('clustor');
 
-var domain = 'autos.serandives.com';
+var self = '*.autos.serandives.com';
 var port = 4004;
 
-clustor(domain, function () {
+clustor(function () {
     var fs = require('fs');
     var http = require('http');
     var express = require('express');
@@ -12,6 +12,7 @@ clustor(domain, function () {
     var bodyParser = require('body-parser');
     var builder = require('component-middleware');
     var agent = require('hub-agent');
+    var proxy = require('proxy');
     var procevent = require('procevent')(process);
 
     var index = fs.readFileSync(__dirname + '/public/index.html', 'utf-8');
@@ -21,6 +22,8 @@ clustor(domain, function () {
     app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
     app.use('/public', express.static(__dirname + '/public'));
+
+    app.use(proxy);
 
     app.use(builder({
         path: '/build/build'
@@ -37,18 +40,13 @@ clustor(domain, function () {
 
     agent('/drones', function (err, io) {
         io.once('connect', function () {
-            io.on('join', function (drone) {
-                log.info(drone);
-            });
-            io.on('leave', function (drone) {
-                log.info(drone);
-            });
+            proxy.listen(self, io);
             procevent.emit('started');
         });
     });
 
 }, function (err, address) {
-    log.info('drone started | domain:%s, address:%s, port:%s', domain, address.address, address.port);
+    log.info('drone started | domain:%s, address:%s, port:%s', self, address.address, address.port);
 });
 
 /*
