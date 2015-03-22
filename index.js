@@ -39,18 +39,15 @@ clustor(function () {
     server.listen(port);
 
     agent('/drones', function (err, io) {
-        io.once('connect', function () {
-            proxy.listen(self, io);
-            procevent.emit('started');
-        });
+        proxy.listen(self, io);
+        procevent.emit('started');
     });
 
 }, function (err, address) {
     log.info('drone started | domain:%s, address:%s, port:%s', self, address.address, address.port);
 });
 
-/*
- process.on('uncaughtException', function (err) {
- log.fatal('unhandled exception %s', err);
- log.trace(err.stack);
- });*/
+process.on('uncaughtException', function (err) {
+    log.fatal('unhandled exception %s', err);
+    log.trace(err.stack);
+});
