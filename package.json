@@ -1,9 +1,15 @@
 {
     "name": "autos",
+    "description": "autos",
+    "version": "0.0.0",
     "dependencies": {
         "express": "4.*",
         "serve-favicon": "2.*",
         "body-parser": "1.*",
         "socket.io": "1.3.*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/serandules/autos.git"
     }
 }
