@@ -9,7 +9,6 @@ clustor(function () {
     var http = require('http');
     var express = require('express');
     var favicon = require('serve-favicon');
-    var bodyParser = require('body-parser');
     var builder = require('component-middleware');
     var agent = require('hub-agent');
     var proxy = require('proxy');
@@ -48,6 +47,6 @@ clustor(function () {
 });
 
 /*process.on('uncaughtException', function (err) {
-    log.fatal('unhandled exception %s', err);
-    log.trace(err.stack);
-});*/
+ log.fatal('unhandled exception %s', err);
+ log.trace(err.stack);
+ });*/
