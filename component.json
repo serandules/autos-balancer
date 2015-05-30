@@ -1,5 +1,5 @@
 {
-    "name": "autos.serandives.com",
+    "name": "autos",
     "scripts": ["client/index.js"],
     "templates": ["component.json"],
     "dependencies": {

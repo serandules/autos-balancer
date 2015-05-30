@@ -13,6 +13,10 @@ clustor(function () {
     var agent = require('hub-agent');
     var proxy = require('proxy');
     var procevent = require('procevent')(process);
+    var utils = require('utils');
+    var build = require('build');
+
+    var prod = utils.prod();
 
     var index = fs.readFileSync(__dirname + '/public/index.html', 'utf-8');
 
@@ -24,9 +28,15 @@ clustor(function () {
 
     app.use(proxy);
 
-    app.use(builder({
-        path: '/build/build'
-    }));
+    if (prod) {
+        log.info('building components during startup');
+        build();
+    } else {
+        log.info('hot component building with express middleware');
+        app.use(builder({
+            path: '/public/build'
+        }));
+    }
 
     //index page
     app.all('*', function (req, res) {

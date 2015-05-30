@@ -10,6 +10,8 @@
         "socket.io": "1.3.*",
         "logger": "serandules/logger#master",
         "clustor": "serandules/clustor#master",
+        "utils": "serandules/utils#master",
+        "build": "serandules/build#master",
         "proxy": "serandules/proxy#master",
         "procevent": "serandules/procevent#master",
         "hub-agent": "serandules/hub-agent#master"
