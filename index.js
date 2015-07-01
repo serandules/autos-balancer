@@ -56,7 +56,7 @@ clustor(function () {
     log.info('drone started | domain:%s, address:%s, port:%s', self, address.address, address.port);
 });
 
-/*process.on('uncaughtException', function (err) {
- log.fatal('unhandled exception %s', err);
- log.trace(err.stack);
- });*/
+process.on('uncaughtException', function (err) {
+    log.fatal('unhandled exception %s', err);
+    log.trace(err.stack);
+});
