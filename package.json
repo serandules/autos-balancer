@@ -6,6 +6,7 @@
         "express": "4.*",
         "serve-favicon": "2.*",
         "component-middleware": "1.*",
+        "dustjs-linkedin": "2.7.*",
         "body-parser": "1.*",
         "socket.io": "1.3.*",
         "logger": "serandules/logger#master",
